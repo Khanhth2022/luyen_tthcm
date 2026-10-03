@@ -1,0 +1,24 @@
+# Thư viện Python tải thêm để đọc PDF (tải lại bằng: python tools/fetch_wheels.py pypdf)
+.pylibs/
+
+# Thư mục tạm
+.tmp/
+
+# Dữ liệu trung gian sinh ra khi trích xuất lại từ PDF
+# (chạy lại: python tools/extract_final.py)
+build/pages.json
+build/pages.txt
+build/annotated.txt
+build/quiz_raw.json
+build/run.log
+
+# Hồ sơ Chrome tạm khi chụp ảnh giao diện (tools/make_shots.js)
+build/p-*/
+build/q-*/
+build/prof-*/
+build/shot_*.html
+
+# Hệ điều hành
+Thumbs.db
+desktop.ini
+.DS_Store

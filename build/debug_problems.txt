@@ -1,0 +1,9 @@
+======================================================================
+II cau 196 ans=C n=3
+STEM: 'Theo Đại hội XII của Đảng, tư tưởng Hồ Chí Minh được khẳng định là gì?'
+RAW: 'Theo Đại hội XII của Đảng, tư tưởng Hồ Chí Minh được khẳng \nđịnh là gì? \nA. Một học thuyết hiện đại hóa kinh tế có giá trị quốc tế lâu dài \nB. Một hệ thống triết lý giáo dục và khoa học toàn diện \nC. Nền tảng tư tưởng, kim chỉ nam cho hành động của Đảng và cách \nmạng Việt Nam, là tài sản tinh thần vô cùng to lớn và quý giá của Đảng và \ndân tộc ta, mãi mãi soi đường cho sự nghiệp cách mạng của Đảng và nhân \ndân ta '
+  A bold=0.0 :: 'Một học thuyết hiện đại hóa kinh tế có giá trị quốc tế lâu dài'
+  B bold=0.0 :: 'Một hệ thống triết lý giáo dục và khoa học toàn diện'
+  C bold=1.0 :: 'Nền tảng tư tưởng, kim chỉ nam cho hành động của Đảng và cách mạng Việt Nam, là tài sản tinh thần vô cùng to lớn và quý giá của Đảng và dân tộc ta, mãi mãi soi đường cho sự nghiệp cách mạng của Đảng và nhân dân ta'
+
+ARTIFACT-FIX (1): ['sâu sắc']

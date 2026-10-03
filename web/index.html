@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luyện trắc nghiệm Tư tưởng Hồ Chí Minh</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <button id="btnMenu" class="icon-btn" aria-label="Mở mục lục" title="Mục lục">☰</button>
+  <div class="brand">
+    <span class="logo">TT</span>
+    <div class="brand-text">
+      <h1>Trắc nghiệm Tư tưởng Hồ Chí Minh</h1>
+      <p id="subtitle">Đang tải…</p>
+    </div>
+  </div>
+  <button id="btnTheme" class="icon-btn" aria-label="Đổi giao diện" title="Sáng / Tối">🌙</button>
+</header>
+
+<div class="layout">
+
+  <!-- ============================ MỤC LỤC ============================ -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-head">
+      <h2>MỤC LỤC</h2>
+      <button id="btnCloseMenu" class="icon-btn small" aria-label="Đóng">✕</button>
+    </div>
+    <div id="toc" class="toc"></div>
+  </aside>
+  <div id="scrim" class="scrim"></div>
+
+  <main class="main">
+
+    <!-- ------------------------------ SETUP ------------------------------ -->
+    <section id="viewSetup" class="view">
+      <div class="hero">
+        <h2 id="heroTitle">Chọn chương để luyện tập</h2>
+        <p id="heroSub">Bộ đề gồm <b>1.042 câu hỏi</b> trắc nghiệm, chia thành <b>6 chương</b> theo đúng mục lục của giáo trình. Mỗi câu đã có sẵn đáp án đúng.</p>
+      </div>
+
+      <div id="chapterCards" class="chapter-cards"></div>
+
+      <div class="setup-panel" id="setupPanel">
+        <div class="setup-row">
+          <label class="field">
+            <span>Chương</span>
+            <select id="selChapter"></select>
+          </label>
+          <label class="field">
+            <span>Mục / phần</span>
+            <select id="selSection"></select>
+          </label>
+        </div>
+
+        <div class="setup-row">
+          <div class="field">
+            <span>Số câu</span>
+            <div class="count-row">
+              <select id="selCount">
+                <option value="10">10 câu</option>
+                <option value="20" selected>20 câu</option>
+                <option value="30">30 câu</option>
+                <option value="50">50 câu</option>
+                <option value="0">Tất cả</option>
+                <option value="custom">Số khác…</option>
+              </select>
+              <input id="numCount" class="num-count hidden" type="number" min="1" max="9999" step="1"
+                     value="15" inputmode="numeric" aria-label="Số câu tự chọn" title="Nhập số câu bạn muốn">
+            </div>
+          </div>
+          <div class="field">
+            <span>Tuỳ chọn</span>
+            <div class="switches">
+              <label class="switch"><input type="checkbox" id="optShuffleQ" checked><i></i><span>Trộn câu hỏi</span></label>
+              <label class="switch"><input type="checkbox" id="optShuffleO"><i></i><span>Trộn đáp án</span></label>
+              <label class="switch"><input type="checkbox" id="optInstant" checked><i></i><span>Hiện đáp án ngay</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="setup-actions">
+          <p id="poolInfo" class="pool-info"></p>
+          <div class="btn-row">
+            <button id="btnPreview" class="btn ghost big">Xem trước câu hỏi &amp; đáp án</button>
+            <button id="btnStart" class="btn primary big">Bắt đầu làm bài →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------- XEM TRƯỚC --------------------------- -->
+    <section id="viewPreview" class="view hidden">
+      <div class="preview-head card">
+        <div class="preview-head-text">
+          <h2 id="previewTitle">Xem trước câu hỏi &amp; đáp án</h2>
+          <p id="previewSub" class="muted"></p>
+        </div>
+        <div class="btn-row">
+          <button id="btnPreviewBack" class="btn ghost">← Quay lại</button>
+          <button id="btnPreviewStart" class="btn primary">Bắt đầu làm bài →</button>
+        </div>
+      </div>
+
+      <div class="preview-tools">
+        <input id="previewSearch" type="search" placeholder="Tìm trong câu hỏi và đáp án…"
+               aria-label="Tìm trong câu hỏi và đáp án">
+        <span id="previewCount" class="muted"></span>
+      </div>
+
+      <div id="previewList" class="preview-list"></div>
+    </section>
+
+    <!-- ------------------------------- QUIZ ------------------------------ -->
+    <section id="viewQuiz" class="view hidden">
+      <div class="quiz-head">
+        <div class="quiz-head-left">
+          <span id="quizChapter" class="chip"></span>
+          <span id="quizCounter" class="counter"></span>
+        </div>
+        <div class="quiz-head-right">
+          <span id="quizTimer" class="timer">00:00</span>
+          <button id="btnQuit" class="btn ghost small">Thoát</button>
+        </div>
+      </div>
+
+      <div class="progress"><div id="progressBar" class="progress-bar"></div></div>
+
+      <article class="card question-card">
+        <div class="q-no" id="qNo">Câu 1</div>
+        <h3 class="q-stem" id="qStem"></h3>
+        <div class="options" id="qOptions"></div>
+        <div class="explain hidden" id="qExplain"></div>
+      </article>
+
+      <div class="quiz-foot">
+        <button id="btnPrev" class="btn ghost">← Câu trước</button>
+        <button id="btnGrid" class="btn ghost">Danh sách câu</button>
+        <button id="btnNext" class="btn primary">Câu sau →</button>
+      </div>
+
+      <div id="jumpGrid" class="jump-grid hidden"></div>
+
+      <div class="quiz-submit">
+        <button id="btnFinish" class="btn danger">Nộp bài &amp; xem kết quả</button>
+      </div>
+    </section>
+
+    <!-- ------------------------------ RESULT ----------------------------- -->
+    <section id="viewResult" class="view hidden">
+      <div class="result-head card">
+        <div class="score-ring" id="scoreRing">
+          <div class="score-inner">
+            <b id="scorePct">0%</b>
+            <small id="scoreFrac">0/0</small>
+          </div>
+        </div>
+        <div class="result-meta">
+          <h2 id="resultTitle">Hoàn thành!</h2>
+          <p id="resultChapter" class="muted"></p>
+          <div class="stats">
+            <div class="stat ok"><b id="stOk">0</b><span>Câu đúng</span></div>
+            <div class="stat no"><b id="stNo">0</b><span>Câu sai</span></div>
+            <div class="stat skip"><b id="stSkip">0</b><span>Chưa trả lời</span></div>
+            <div class="stat time"><b id="stTime">00:00</b><span>Thời gian</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button id="btnRedo" class="btn primary">Làm lại chương này</button>
+        <button id="btnRedoWrong" class="btn warn">Luyện lại câu sai</button>
+        <button id="btnHome" class="btn ghost">Về trang chủ</button>
+      </div>
+
+      <h3 class="review-title" id="reviewTitle">Chi tiết</h3>
+      <div id="reviewList" class="review-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+
+<!-- ------------------------- HỘP THOẠI XÁC NHẬN ------------------------- -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <h3 id="modalTitle"></h3>
+    <p id="modalBody"></p>
+    <div class="modal-actions">
+      <button id="modalCancel" class="btn ghost">Huỷ</button>
+      <button id="modalOk" class="btn primary">Đồng ý</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

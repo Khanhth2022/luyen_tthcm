@@ -1,0 +1,9 @@
+# Chuẩn hoá xuống LF trong kho, tránh lệch dòng giữa Windows và nơi khác
+* text=auto eol=lf
+
+# Tệp nhị phân
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+*.whl binary
